@@ -16,7 +16,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //Add routers below:
-
+import userRouter from './routes/user.js';
+app.use('/user', userRouter)
 
 // Set up a default "catch all" route to use when someone visits a route
 // that we haven't built
