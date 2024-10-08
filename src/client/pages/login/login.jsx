@@ -30,8 +30,7 @@ const Login = () => {
         });
 
         const data = await res.json();
-        console.log("data", data);
-
+    
         if (data.token) {
           login(data.token, data.user);
           navigate("/")

@@ -1,14 +1,25 @@
-import { useState, useEffect, useContext} from "react";
+import { useState, useEffect, useContext } from "react";
+import { format } from "date-fns";
 import useAuth from "../../hooks/useAuth";
 import { AppContext } from "../../App.jsx";
 import { Link } from "react-router-dom";
 import "./dashboard.css";
 
 const Dashboard = () => {
-  const {token} = useAuth();
+  const { token } = useAuth();
   const { apiUrl } = useContext(AppContext);
   const [showModal, setShowModal] = useState(false);
-  const [plannedTrips, setPlannedTrips] = useState([
+  const [plannedTrips, setPlannedTrips] = useState([]);
+  const [newTrip, setNewTrip] = useState({
+    name: "",
+    location: "",
+    startDate: "",
+    endDate: "",
+    imgUrl: "",
+  });
+  const [error, setError] = useState(null);
+  const [tripCreated, setTripCreated] = useState(false);
+  const [mockTrips, setMockTrips] = useState([
     {
       id: 1,
       name: "Summer in Paris",
@@ -37,34 +48,32 @@ const Dashboard = () => {
         "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=500&q=80",
     },
   ]);
-  const [newTrip, setNewTrip] = useState({
-    name: "",
-    location: "",
-    startDate: "",
-    endDate: "",
-    imgUrl: "",
-  });
 
   useEffect(() => {
-     const fetchUsersTrips = async () => {
-       try {
-        const res = await fetch(apiUrl + "/trips", {
+    const fetchUsersTrips = async () => {
+      if (!token) return;
+      try {
+        const res = await fetch(`${apiUrl}/trips/usersTrips`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         });
-
         const data = await res.json();
-        console.log("data all trips", data);
-       } catch (e) {
-         console.log("error", e)
-     };
-    }
 
-     fetchUsersTrips();
-  }, []);
+        if (data.trips) {
+          setPlannedTrips(data.trips);
+        } else {
+          setError(data.error);
+        }
+      } catch (error) {
+        setError(error.message || "Failed to load planned trips");
+      }
+    };
+
+    fetchUsersTrips();
+  }, [token, tripCreated]);
 
   function handleInput(event) {
     const { name, value } = event.target;
@@ -75,14 +84,11 @@ const Dashboard = () => {
   }
 
   function handleSubmit(event) {
-    console.log("Form submitted begginnig");
     event.preventDefault();
-    // console.log("Form submitted");
-    // setPlannedTrips([...plannedTrips, newTrip]);
 
     const addNewTrip = async () => {
       try {
-        const res = await fetch(apiUrl + "/trips/addTrip", {
+        const res = await fetch(`${apiUrl}/trips/addTrip`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -92,10 +98,22 @@ const Dashboard = () => {
         });
 
         const data = await res.json();
-        console.log("data", data);
 
+        if (data.trip) {
+          setTripCreated(!tripCreated);
+          setNewTrip({
+            name: "",
+            location: "",
+            startDate: "",
+            endDate: "",
+            imgUrl: "",
+          });
+          closeModal()
+        } else {
+          setError(data.error);
+        }
       } catch (error) {
-        console.error("Error during login:", error);
+        setError(error.message || "Failed to add new trip");
       }
     };
 
@@ -110,17 +128,17 @@ const Dashboard = () => {
     setShowModal(false);
   };
 
-  console.log("newTrip", newTrip);
-
   return (
     <>
       <aside className="left-menu">
         <h2>My Trips</h2>
-        <div className="trip-links">
-          {plannedTrips.map((trip, index) => {
-            return <Link key={index}>{trip.name}</Link>;
-          })}
-        </div>
+        {plannedTrips && (
+          <div className="trip-links">
+            {plannedTrips.map((trip, index) => {
+              return <Link key={index}>{trip.name}</Link>;
+            })}
+          </div>
+        )}
       </aside>
       <div className="planned-trips-wrapper">
         <div className="planned-trips-header">
@@ -129,25 +147,37 @@ const Dashboard = () => {
             + Add New Trip{" "}
           </button>
         </div>
-        <div className="planned-trips">
-          <ul className="trip-cards">
-            {plannedTrips.map((trip, index) => {
-              return (
-                <li key={index} className="trip-card">
-                  <img src={trip.imgUrl} alt={trip.name} />
-                  <div className="card-content">
-                    <h3>{trip.name}</h3>
-                    <p>{trip.location}</p>
-                    <p>
-                      {trip.startDate} to {trip.endDate}
-                    </p>
-                  </div>
-                  <button>View Details</button>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+        {plannedTrips && (
+          <div className="planned-trips">
+            <ul className="trip-cards">
+              {plannedTrips.map((trip, index) => {
+                return (
+                  <li key={index} className="trip-card">
+                    {trip.imgUrl ? (
+                      <img src={trip.imgUrl} alt="Trip Image" />
+                    ) : (
+                      <div className="placeholder">No Image Available</div>
+                    )}
+                    <div className="card-content">
+                      <h3>{trip.name}</h3>
+                      <p>{trip.location}</p>
+                      <p>
+                        {trip.startDate
+                          ? format(new Date(trip.startDate), "dd-MM-yyyy")
+                          : ""}{" "}
+                        to{" "}
+                        {trip.endDate
+                          ? format(new Date(trip.endDate), "dd-MM-yyyy")
+                          : ""}
+                      </p>
+                    </div>
+                    <button>View Details</button>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
       </div>
 
       {showModal && (
@@ -169,9 +199,9 @@ const Dashboard = () => {
               <label htmlFor="img">Cover Photo</label>
               <input
                 type="text"
-                id="img"
-                name="img"
-                value={newTrip.img}
+                id="imgUrl"
+                name="imgUrl"
+                value={newTrip.imgUrl}
                 onChange={handleInput}
               ></input>
               <label htmlFor="location">Location</label>

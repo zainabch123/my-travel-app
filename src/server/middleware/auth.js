@@ -11,11 +11,9 @@ export async function verifyToken(req, res, next) {
       error: "Authorization missing in headers",
     });
   }
-
   try {
     const decoded = jwt.verify(token, secret);
 
-    console.log("decoded", decoded)
     const user = await prisma.user.findUnique({
       where: {
         id: decoded.id,

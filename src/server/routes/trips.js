@@ -7,6 +7,6 @@ import { verifyToken } from "../middleware/auth.js";
 router.post("/addTrip", verifyToken, addNewTrip);
 
 //Get users trips:
-router.get("/", verifyToken, getUsersTrips);
+router.get("/usersTrips", verifyToken, getUsersTrips);
 
 export default router;

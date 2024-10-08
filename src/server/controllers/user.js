@@ -61,7 +61,7 @@ const loginUser = async (req, res) => {
        return res.status(200).json({ user: foundUser, token });
 
     } catch(e) {
-        return res.status(500).json({ Error: "Unable to login user" });
+        return res.status(500).json({ error: "Unable to login user" });
     }
 }
 

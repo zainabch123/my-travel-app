@@ -1,3 +1,4 @@
+import JsonWebTokenError from "jsonwebtoken/lib/JsonWebTokenError";
 import { useEffect, useState, createContext } from "react";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
 
@@ -10,10 +11,9 @@ const AuthProvider = ({children}) => {
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    console.log("setting user here")
     const storedToken = localStorage.getItem("token");
     const storedUser = JSON.parse(localStorage.getItem("user"));
-    console.log("stored user", storedUser);
+   
 
     if (storedToken) {
       setToken(storedToken);
@@ -22,6 +22,7 @@ const AuthProvider = ({children}) => {
         navigate(location.state.from.pathname || "/");
       }
     }
+
   }, [location.state?.from?.pathname, navigate]);
 
   const login = (newToken, newUser) => {

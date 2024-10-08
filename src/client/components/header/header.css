@@ -4,7 +4,6 @@
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
-    background-color: rgb(57, 198, 237);
 }
 
 .travel-planner-logo h1 {
