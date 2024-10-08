@@ -9,7 +9,7 @@ const registerUser = async (req, res) => {
 
   if (!username || !password) {
     return res.status(400).json({
-      Error: "Missing fields in request body",
+      error: "Missing fields in request body",
     });
   }
 
@@ -23,11 +23,11 @@ const registerUser = async (req, res) => {
       if (e.code === "P2002") {
         return res
           .status(409)
-          .json({ Error: "A user with the provided username already exists" });
+          .json({ error: "A user with the provided username already exists" });
       }
     }
 
-    return res.status(500).json({ Error: "Unable to create new user"});
+    return res.status(500).json({ error: "Unable to create new user" });
   }
 };
 

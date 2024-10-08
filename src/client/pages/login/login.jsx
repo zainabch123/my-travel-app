@@ -1,11 +1,15 @@
 import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../../App.jsx";
+import useAuth from "../../hooks/useAuth";
 import "./login.css";
 
 const Login = () => {
   const { apiUrl } = useContext(AppContext);
+  const { login } = useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({ username: "", password: "" });
+  const [error, setError] = useState(null);
 
   function handleInput(event) {
     const { name, value } = event.target;
@@ -27,8 +31,16 @@ const Login = () => {
 
         const data = await res.json();
         console.log("data", data);
+
+        if (data.token) {
+          login(data.token, data.user);
+          navigate("/")
+        } else {
+          setError(data.error);
+        }
       } catch (error) {
         console.error("Error during login:", error);
+        setError("An error occurred during login. Please try again.");
       }
     };
 
@@ -58,6 +70,7 @@ const Login = () => {
           <button id="login-button" type="submit" onSubmit={handleSubmit}>
             Log In
           </button>
+          {error && <p>{error}</p>}
         </form>
         <div className="login-options">
           <p>Or login in with</p>

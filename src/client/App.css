@@ -3,3 +3,11 @@
   margin: 0px;
   padding: 0px;
 }
+
+.container {
+  height: 100vh;
+  display: grid; 
+  grid-template-columns: 280px 1fr;
+  grid-template-rows: 80px 1fr;
+   background-color: rgb(57, 198, 237);
+}

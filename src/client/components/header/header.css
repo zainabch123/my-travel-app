@@ -1,0 +1,63 @@
+.header{
+    grid-column: 1 / span 3;
+    border: 1px solid black;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    background-color: rgb(57, 198, 237);
+}
+
+.travel-planner-logo h1 {
+    text-align: left;
+     margin: 20px 0px 20px 20px;
+    
+}
+
+.search-bar-wrapper  {
+    width: 900px;
+    justify-self: center;
+}
+
+#search-bar {
+     margin: 20px
+}
+
+.profile-circle {
+    display: grid;
+   border: 1px solid black;
+   border-radius: 50%;
+   width: 60px;
+   height: 60px;
+   text-align: center;
+   margin-right: 20px;
+   margin-left: 20px;
+   justify-self: end;
+   background-color: white;   
+   align-content: center;
+   cursor: pointer;
+}
+
+.profile-circle p {
+    font-size: 25px;
+}
+
+.user-panel {
+    position: absolute;
+    right: 100px;
+    top: 45px;
+    z-index: 10;
+    min-width: fit-content;
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.user-panel a {
+    text-decoration: none;
+    color: black;
+}
+
+.user-panel p {
+    margin: 10px;
+    font-size: 18px;
+}

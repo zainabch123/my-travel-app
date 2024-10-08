@@ -25,6 +25,7 @@ model User {
   password String
   firstName String
   lastName  String
+  trips     Trips[]
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 }
@@ -64,6 +65,19 @@ model Activities {
   country String
   imageUrl String
   rating   Int
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Trips {
+  id Int @id @default(autoincrement())
+  name    String
+  location String
+  startDate String
+  endDate   String
+  imgUrl    String
+  user      User @relation(fields: [userId], references: [id])
+  userId    Int   
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 }
