@@ -4,6 +4,7 @@
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
+    background: rgb(102, 218, 251)
 }
 
 .travel-planner-logo h1 {
@@ -13,12 +14,32 @@
 }
 
 .search-bar-wrapper  {
-    width: 900px;
     justify-self: center;
+    display: grid;
+    grid-template-columns: auto auto auto;
 }
 
+#search-filter {
+    width: 180px;
+    margin: 20px 0px 20px 20px;
+    border-radius: 8px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+
+#search-query-submit {
+    width: max-content;
+    margin: 20px 0px 20px 0px;
+    border-radius: 8px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+
 #search-bar {
-     margin: 20px
+    width: 800px;
+     margin: 20px 10px 20px 10px;
 }
 
 .profile-circle {

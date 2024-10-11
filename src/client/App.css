@@ -2,12 +2,45 @@
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
+  font-family: "Geist";
+  font-weight: 400;
+  
 }
 
+h1 {
+  font-weight: 600
+}
+
+h2 {
+  font-weight: 500
+}
 .container {
   height: 100vh;
   display: grid; 
   grid-template-columns: 280px 1fr;
   grid-template-rows: 80px 1fr;
-   background: linear-gradient(135deg, rgb(57, 198, 237), rgb(224, 232, 234));
+   background: white
 }
+
+@font-face {
+  font-family: "Geist";
+  src: local("GeistMedium"),
+    url("./fonts/Geist/Geist-Medium.ttf") format("truetype");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Geist";
+  src: local("GeistRegular"),
+    url("./fonts/Geist/Geist-Regular.ttf") format("truetype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Geist";
+  src: local("GeistLight"),
+    url("./fonts/Geist/Geist-Light.ttf") format("truetype");
+  font-weight: 400;
+}
+
+

@@ -1,15 +1,14 @@
 import { useState, useEffect, useContext } from "react";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import { format } from "date-fns";
 import useAuth from "../../hooks/useAuth";
 import { AppContext } from "../../App.jsx";
-import { Link } from "react-router-dom";
 import "./dashboard.css";
 
 const Dashboard = () => {
   const { token } = useAuth();
-  const { apiUrl } = useContext(AppContext);
+  const { apiUrl, plannedTrips, setPlannedTrips } = useContext(AppContext);
   const [showModal, setShowModal] = useState(false);
-  const [plannedTrips, setPlannedTrips] = useState([]);
   const [newTrip, setNewTrip] = useState({
     name: "",
     location: "",
@@ -19,35 +18,6 @@ const Dashboard = () => {
   });
   const [error, setError] = useState(null);
   const [tripCreated, setTripCreated] = useState(false);
-  const [mockTrips, setMockTrips] = useState([
-    {
-      id: 1,
-      name: "Summer in Paris",
-      location: "Paris, France",
-      startDate: "2023-07-15",
-      endDate: "2023-07-22",
-      imgUrl:
-        "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=500&q=80",
-    },
-    {
-      id: 2,
-      name: "Tokyo Adventure",
-      location: "Tokyo, Japan",
-      startDate: "2023-09-10",
-      endDate: "2023-09-20",
-      imgUrl:
-        "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=500&q=80",
-    },
-    {
-      id: 3,
-      name: "New York City Trip",
-      location: "New York, USA",
-      startDate: "2023-11-05",
-      endDate: "2023-11-12",
-      imgUrl:
-        "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=500&q=80",
-    },
-  ]);
 
   useEffect(() => {
     const fetchUsersTrips = async () => {
@@ -108,7 +78,7 @@ const Dashboard = () => {
             endDate: "",
             imgUrl: "",
           });
-          closeModal()
+          closeModal();
         } else {
           setError(data.error);
         }
@@ -130,16 +100,6 @@ const Dashboard = () => {
 
   return (
     <>
-      <aside className="left-menu">
-        <h2>My Trips</h2>
-        {plannedTrips && (
-          <div className="trip-links">
-            {plannedTrips.map((trip, index) => {
-              return <Link key={index}>{trip.name}</Link>;
-            })}
-          </div>
-        )}
-      </aside>
       <div className="planned-trips-wrapper">
         <div className="planned-trips-header">
           <h1>Planned Trips</h1>

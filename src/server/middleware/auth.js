@@ -11,6 +11,7 @@ export async function verifyToken(req, res, next) {
       error: "Authorization missing in headers",
     });
   }
+  
   try {
     const decoded = jwt.verify(token, secret);
 

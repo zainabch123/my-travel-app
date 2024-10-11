@@ -18,11 +18,8 @@ const addNewTrip = async (req, res) => {
       endDate: endDate === "" ? null: new Date(endDate),
       imgUrl: imgUrl === "" ? null : imgUrl
     };
-    // const parsedStartDate = new Date(startDate);
-    // const parsedEndDate = new Date(endDate);
+ 
 
-    console.log("start", newTripData.startDate);
-    console.log("end", newTripData.endDate);
     if (newTripData.startDate > newTripData.endDate) {
       return res.status(400).json({
         error: "End date cannot be earlier than start date.",

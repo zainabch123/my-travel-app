@@ -22,6 +22,9 @@ app.use('/user', userRouter)
 import tripsRouter from './routes/trips.js'
 app.use('/trips', tripsRouter);
 
+import tripAdvisorApiRouter from './routes/api.js'
+app.use('/api', tripAdvisorApiRouter);
+
 // Set up a default "catch all" route to use when someone visits a route
 // that we haven't built
 app.get("*", (req, res) => {
