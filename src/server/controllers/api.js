@@ -2,33 +2,40 @@ import { getTravelDataDb } from "../domains/api.js";
 
 const getTravelData = async (req, res) => {
   const searchQuery = req.query.searchQuery;
+  const category = req.query.category;
+
+  if (category) {
+    console.log("category", category)
+  };
   const tripAdvisorApiKey = process.env.VITE_TRIPADVISOR_API_KEY;
 
   try {
+    
     const locationsResponse = await fetch(
-      `https://api.content.tripadvisor.com/api/v1/location/search?${tripAdvisorApiKey}&language=en&searchQuery=${searchQuery}`
+      `https://api.content.tripadvisor.com/api/v1/location/search?${tripAdvisorApiKey}&language=en&searchQuery=${searchQuery}&category=${category}`
     );
      const data = await locationsResponse.json();
      const locations = data.data;
 
-     console.log("locations", locations);
-
      const fetchLocationDetails = locations.map(async (location) => {
+      const detailsResponse = await fetch(
+        `https://api.content.tripadvisor.com/api/v1/location/${location.location_id}/details?${tripAdvisorApiKey}`
+      );
+      const detailData = await detailsResponse.json();
+      const description = detailData.description;
+      const rating  = detailData.rating;
+      const category = detailData.category;
+
         const imagesResponse = await fetch(
           `https://api.content.tripadvisor.com/api/v1/location/${location.location_id}/photos?${tripAdvisorApiKey}&language=en`
         );
         const imgData = await imagesResponse.json();
         const images = imgData.data;
 
-       const detailsResponse = await fetch(
-         `https://api.content.tripadvisor.com/api/v1/location/${location.location_id}/details?${tripAdvisorApiKey}`
-       );
-       const detailData = await detailsResponse.json();
-       const details = detailData;
+        console.log(images)
 
-       console.log("details", details)
        // Merge data arrays:
-       return { ...location, images, details };
+       return { ...location, description, rating, category, images };
      });
 
        const locationsWithDetails = await Promise.all(fetchLocationDetails);

@@ -1,83 +1,107 @@
-.header{
-    grid-column: 1 / span 3;
-    border: 1px solid black;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    background: rgb(102, 218, 251)
+.header {
+  grid-column: 1 / span 3;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  background: rgb(102, 218, 251);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.travel-planner-logo {
+  text-align: left;
+  margin-left: 20px;
+  display: grid;
+  grid-template-columns: 40px auto;
+  justify-items: center;
+  align-items: center;
 }
 
 .travel-planner-logo h1 {
-    text-align: left;
-     margin: 20px 0px 20px 20px;
-    
+  margin: 20px 20px 20px 0px;
 }
 
-.search-bar-wrapper  {
-    justify-self: center;
-    display: grid;
-    grid-template-columns: auto auto auto;
+.travel-planner-logo svg {
+  width: 100%;
 }
 
-#search-filter {
-    width: 180px;
-    margin: 20px 0px 20px 20px;
-    border-radius: 8px;
-    padding: 5px;
-    cursor: pointer;
+.search-bar-wrapper {
+  justify-self: center;
+  display: grid;
+  grid-template-columns: auto auto;
 }
-
 
 #search-query-submit {
-    width: max-content;
-    margin: 20px 0px 20px 0px;
-    border-radius: 8px;
-    padding: 5px;
-    cursor: pointer;
+  width: max-content;
+  margin: 20px 0px 20px 0px;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: none;
+  color: black;
+  background-color: rgb(239, 239, 239);
+  border: 1px solid rgb(223, 222, 222);
+  font-weight: 400;
+  transition: box-shadow 0.3s ease; 
+  
 }
 
+#search-query-submit:hover {
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
+}
 
 #search-bar {
-    width: 800px;
-     margin: 20px 10px 20px 10px;
+  width: 900px;
+  margin: 20px 10px 20px 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+   transition: box-shadow 0.3s ease; 
 }
 
-.profile-circle {
-    display: grid;
-   border: 1px solid black;
-   border-radius: 50%;
-   width: 60px;
-   height: 60px;
-   text-align: center;
-   margin-right: 20px;
-   margin-left: 20px;
-   justify-self: end;
-   background-color: white;   
-   align-content: center;
-   cursor: pointer;
+#search-bar:focus {
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
 }
+.profile-circle {
+  display: grid;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  margin-right: 20px;
+  margin-left: 20px;
+  justify-self: end;
+  background-color: white;
+  align-content: center;
+  cursor: pointer;
+  border: 1px solid rgb(210, 209, 209);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.profile-circle:hover {
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
+}
+
 
 .profile-circle p {
-    font-size: 25px;
+  font-size: 25px;
 }
 
 .user-panel {
-    position: absolute;
-    right: 100px;
-    top: 45px;
-    z-index: 10;
-    min-width: fit-content;
-    background-color: white;
-    padding: 10px;
-    border-radius: 8px;
+  position: absolute;
+  right: 100px;
+  top: 45px;
+  z-index: 10;
+  min-width: fit-content;
+  background-color: white;
+  padding: 10px;
+  border-radius: 8px;
 }
 
 .user-panel a {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
 }
 
 .user-panel p {
-    margin: 10px;
-    font-size: 18px;
+  margin: 10px;
+  font-size: 18px;
 }

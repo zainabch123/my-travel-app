@@ -1,17 +1,8 @@
-.left-menu {
-  background-color: white;
-  border: 1px solid black;
-  margin: 20px;
-  border-radius: 10px;
-  padding: 20px;
-}
-
 .planned-trips-wrapper {
   overflow: scroll;
   overflow-x: hidden;
   display: grid;
   grid-template-rows: 80px 1fr;
-  /* grid-template-rows: auto repeat(3, 400px); */
 }
 
 .planned-trips-header {
@@ -30,6 +21,18 @@
   border-radius: 30px;
   width: 150px;
   height: 50px;
+  border: none;
+  font-size: 15px;
+  font-weight: 500;
+  border: 1px solid rgb(210, 209, 209);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.add-trip-button:hover {
+  color: white;
+  font-weight: 500;
+  background-color: rgb(172, 172, 172);
+  border: none;
 }
 
 .planned-trips {
@@ -38,16 +41,24 @@
 
 .trip-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 350px));
   gap: 20px;
   border-radius: 8px;
 }
 
 .trip-card {
+  display: grid;
   background-color: white;
   border-radius: 8px;
   list-style: none;
-  border: 1px solid black;
+  border: 1px solid rgb(206, 206, 206);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.trip-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2); 
 }
 
 .trip-card img {
@@ -59,14 +70,14 @@
 
 .trip-card .placeholder {
   width: 100%;
-  height: 200px; 
+  height: 200px;
   background-color: #f0f0f0;
   border-radius: 8px 8px 0 0;
-  display: flex; /* Center content */
-  align-items: center; /* Center vertically */
-  justify-content: center; /* Center horizontally */
-  font-size: 16px; 
-  color: #888; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-size: 16px;
+  color: #888;
 }
 
 .card-header,
@@ -74,11 +85,26 @@
   padding: 20px;
 }
 
+.card-content p {
+  margin-bottom: 10px;
+}
+
 .trip-card button {
   margin: 10px;
   padding: 10px;
   border-radius: 15px;
-  
+  border: 1px solid rgb(206, 206, 206);
+  width: 120px;
+  justify-self: end;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+
+.trip-card button:hover {
+  color: white;
+  font-weight: 500;
+  background-color: rgb(172, 172, 172);
+  border: none;
 }
 
 .trip-links a {
@@ -90,7 +116,7 @@
 }
 
 #new-trip-form-submit {
-    padding: 10px;
+  padding: 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -109,7 +135,7 @@
 }
 
 .modal {
-    position: relative;
+  position: relative;
   background: white;
   padding: 20px;
   border-radius: 8px;
@@ -118,9 +144,9 @@
 }
 
 .close-modal {
-position: absolute; 
-  top: -5px; 
-  right: 20px; 
+  position: absolute;
+  top: -5px;
+  right: 20px;
   margin-top: 20px;
   background: red;
   color: white;
@@ -128,5 +154,4 @@ position: absolute;
   border: none;
   border-radius: 5px;
   cursor: pointer;
- 
 }

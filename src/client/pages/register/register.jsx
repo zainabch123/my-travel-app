@@ -1,11 +1,11 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AppContext } from "../../App.jsx";
+import useTrip from "../../hooks/useTrip";
 import useAuth from "../../hooks/useAuth";
 import "./register.css";
 
 const Register = () => {
-  const { apiUrl } = useContext(AppContext);
+  const { apiUrl } = useTrip();
   const { login } = useAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({

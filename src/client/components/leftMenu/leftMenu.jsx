@@ -1,13 +1,16 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AppContext } from "../../App.jsx";
+import useTrip from "../../hooks/useTrip";
 
+import './leftMenu.css'
 
 const LeftMenu = () => {
-      const { plannedTrips, setPlannedTrips } = useContext(AppContext);
+      const { plannedTrips } = useTrip();
+
   return (
     <aside className="left-menu">
-      <h2>My Trips</h2>
+      <Link to="/">
+        <h2>My Trips</h2>
+      </Link>
       {plannedTrips && (
         <div className="trip-links">
           {plannedTrips.map((trip, index) => {

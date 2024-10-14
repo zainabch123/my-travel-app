@@ -1,6 +1,5 @@
-import JsonWebTokenError from "jsonwebtoken/lib/JsonWebTokenError";
 import { useEffect, useState, createContext } from "react";
-import { useNavigate, useLocation, Navigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const AuthContext = createContext();
 

@@ -1,13 +1,11 @@
-import { useState, useEffect, useContext } from "react";
-import { useNavigate, useLocation, Navigate } from "react-router-dom";
+import { useState } from "react";
 import { format } from "date-fns";
-import useAuth from "../../hooks/useAuth";
-import { AppContext } from "../../App.jsx";
+import useTrip from "../../hooks/useTrip";
+
 import "./dashboard.css";
 
 const Dashboard = () => {
-  const { token } = useAuth();
-  const { apiUrl, plannedTrips, setPlannedTrips } = useContext(AppContext);
+  const { plannedTrips, addNewTrip, error } = useTrip();
   const [showModal, setShowModal] = useState(false);
   const [newTrip, setNewTrip] = useState({
     name: "",
@@ -15,36 +13,10 @@ const Dashboard = () => {
     startDate: "",
     endDate: "",
     imgUrl: "",
+    itinerary: [],
   });
-  const [error, setError] = useState(null);
-  const [tripCreated, setTripCreated] = useState(false);
-
-  useEffect(() => {
-    const fetchUsersTrips = async () => {
-      if (!token) return;
-      try {
-        const res = await fetch(`${apiUrl}/trips/usersTrips`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const data = await res.json();
-
-        if (data.trips) {
-          setPlannedTrips(data.trips);
-        } else {
-          setError(data.error);
-        }
-      } catch (error) {
-        setError(error.message || "Failed to load planned trips");
-      }
-    };
-
-    fetchUsersTrips();
-  }, [token, tripCreated]);
-
+  
+ 
   function handleInput(event) {
     const { name, value } = event.target;
     setNewTrip({
@@ -56,38 +28,8 @@ const Dashboard = () => {
   function handleSubmit(event) {
     event.preventDefault();
 
-    const addNewTrip = async () => {
-      try {
-        const res = await fetch(`${apiUrl}/trips/addTrip`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(newTrip),
-        });
-
-        const data = await res.json();
-
-        if (data.trip) {
-          setTripCreated(!tripCreated);
-          setNewTrip({
-            name: "",
-            location: "",
-            startDate: "",
-            endDate: "",
-            imgUrl: "",
-          });
-          closeModal();
-        } else {
-          setError(data.error);
-        }
-      } catch (error) {
-        setError(error.message || "Failed to add new trip");
-      }
-    };
-
-    addNewTrip();
+    addNewTrip(newTrip);
+    closeModal();
   }
 
   const handleAddTripClick = () => {
