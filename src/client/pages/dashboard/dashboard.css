@@ -159,3 +159,8 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+.modal-error-message {
+  margin: 10px;
+  color: tomato;
+}

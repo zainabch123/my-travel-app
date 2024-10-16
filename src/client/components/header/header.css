@@ -38,13 +38,13 @@
 #search-query-submit {
   width: max-content;
   margin: 20px 0px 20px 0px;
-  border-radius: 30px;
+  border-radius: 20px;
   padding: 10px;
   cursor: pointer;
   border: none;
   color: black;
   background-color: rgb(239, 239, 239);
-  font-weight: 400;
+  font-size: 13px;
   transition: box-shadow 0.3s ease; 
   
 }

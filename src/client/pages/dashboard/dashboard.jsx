@@ -7,7 +7,7 @@ import "./dashboard.css";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { plannedTrips, addNewTrip, error } = useTrip();
+  const { plannedTrips, addNewTrip, addTripError, setAddTripError, fetchTripsError } = useTrip();
   const [showModal, setShowModal] = useState(false);
   const [newTrip, setNewTrip] = useState({
     name: "",
@@ -25,10 +25,12 @@ const Dashboard = () => {
     });
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
-    addNewTrip(newTrip);
+   const result = await addNewTrip(newTrip);
+
+   if (result) {
     setNewTrip({
       name: "",
       location: "",
@@ -38,6 +40,7 @@ const Dashboard = () => {
       itinerary: [],
     });
     closeModal();
+   }
   }
 
   const handleAddTripClick = () => {
@@ -45,9 +48,15 @@ const Dashboard = () => {
   };
 
   const closeModal = () => {
+    setAddTripError(null)
     setShowModal(false);
   };
 
+  if (fetchTripsError) {
+    return <div className="error-message">{fetchTripsError}</div>;
+  }
+
+  
   return (
     <>
       <div className="planned-trips-wrapper">
@@ -140,6 +149,9 @@ const Dashboard = () => {
                 value={newTrip.endDate}
                 onChange={handleInput}
               ></input>
+              {addTripError && (
+              <div className="modal-error-message">{addTripError}</div>
+            )}
               <button
                 id="new-trip-form-submit"
                 type="submit"

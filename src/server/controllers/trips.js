@@ -11,7 +11,7 @@ const addNewTrip = async (req, res) => {
 
   if (!name || !location || !startDate || !endDate) {
     return res.status(400).json({
-      error: "Missing fields in request body",
+      error: "Name, Location, Start Date, and End Date are required.",
     });
   }
 

@@ -1,23 +1,27 @@
 import { useState, useEffect, createContext } from "react";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { da } from "date-fns/locale";
 
 const TripContext = createContext();
 
-const TripProvider = ({ children }) => {
+const TripProvider = ({children}) => {
   const { token, user } = useAuth();
   const apiUrl = import.meta.env.VITE_API_URL;
+  const navigate = useNavigate();
   const [tripData, setTripData] = useState([]);
   const [plannedTrips, setPlannedTrips] = useState([]);
-  const [error, setError] = useState(null);
+  const [fetchTripsError, setFetchTripsError] = useState(null);
+  const [addTripError, setAddTripError] = useState(null);
+  const [searchError, setSearchError] = useState(null);
   const [tripCreated, setTripCreated] = useState(false);
 
   useEffect(() => {
     const fetchUsersTrips = async () => {
       if (!token) {
         setPlannedTrips([]);
-        return
-      };
+        return;
+      }
       try {
         const res = await fetch(`${apiUrl}/trips/${user.id}`, {
           method: "GET",
@@ -33,19 +37,17 @@ const TripProvider = ({ children }) => {
           throw new Error(data.error);
         }
 
-        if (data.trips) {
-          setPlannedTrips(data.trips);
-        }
+        setPlannedTrips(data.trips);
       } catch (error) {
-        setError(error.Error || "Failed to load planned trips");
+        setFetchTripsError(error.Error || "Unable to load planned trips.");
       }
     };
 
     fetchUsersTrips();
   }, [token, tripCreated]);
 
-
   const addNewTrip = async (newTrip) => {
+    setAddTripError(null);
     try {
       const res = await fetch(`${apiUrl}/trips/addTrip`, {
         method: "POST",
@@ -58,21 +60,38 @@ const TripProvider = ({ children }) => {
 
       const data = await res.json();
 
-      if (data.trip) {
-        setTripCreated(!tripCreated);
-        setNewTrip({
-          name: "",
-          location: "",
-          startDate: "",
-          endDate: "",
-          imgUrl: "",
-          itinerary: [],
-        });
-      } else {
-        setError(data.error);
+      if (data.error) {
+        throw new Error(data.error);
       }
+
+      setTripCreated(!tripCreated);
+      return data;
     } catch (error) {
-      setError(error.message || "Failed to add new trip");
+      setAddTripError(error.message || "Failed to add new trip.");
+    }
+  };
+
+  const fetchTravelData = async (searchInput) => {
+    setSearchError(null);
+    try {
+      // const res = await fetch(`${apiUrl}/api/search?searchQuery=${searchInput}`);
+      // const data = await res.json();
+
+      // if (data.error) {
+      //   throw new Error(data.error);
+      // }
+
+      // setTripData(data.data);
+      // localStorage.setItem("data", JSON.stringify(data.data));
+      // navigate("/search");
+
+      // Delete these three line
+      const storedData = JSON.parse(localStorage.getItem("data"));
+      setTripData(storedData);
+      navigate("/search");
+    } catch (error) {
+      setSearchError(error.message || "Unable to fetch travel data");
+      navigate("/search");
     }
   };
 
@@ -81,9 +100,13 @@ const TripProvider = ({ children }) => {
     tripData,
     setTripData,
     addNewTrip,
-    error,
     plannedTrips,
     setPlannedTrips,
+    fetchTravelData,
+    searchError,
+    addTripError,
+    fetchTripsError,
+    setAddTripError,
   };
   return <TripContext.Provider value={value}>{children}</TripContext.Provider>;
 };

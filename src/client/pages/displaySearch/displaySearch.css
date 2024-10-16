@@ -115,3 +115,10 @@
 .card-panel a:hover {
   color: rgb(55, 193, 231);
 }
+
+.error-message {
+  font-size: 1.3rem;
+  margin: 20px;
+  padding: 20px;
+  color: tomato;
+}

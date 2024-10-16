@@ -10,7 +10,7 @@ import { TripProvider } from "./context/trip.jsx";
 
 import "./App.css";
 
-function App() {
+const App = () => {
   return (
     <AuthProvider>
       <TripProvider>
@@ -35,11 +35,14 @@ function App() {
             }
           ></Route>
 
-          <Route path="/viewTrip/:id" element={
-            <ProtectedRoute>
-              <ViewTrip/>
-            </ProtectedRoute>
-          }></Route>
+          <Route
+            path="/viewTrip/:id"
+            element={
+              <ProtectedRoute>
+                <ViewTrip />
+              </ProtectedRoute>
+            }
+          ></Route>
         </Routes>
       </TripProvider>
     </AuthProvider>

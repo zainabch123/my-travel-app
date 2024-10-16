@@ -8,11 +8,9 @@ import "./displaySearch.css";
 const DisplaySearch = () => {
   const { apiUrl } = useTrip();
   const { token } = useAuth();
-  const { tripData, setTripData } = useTrip();
+  const { tripData, searchError } = useTrip();
   const [visiblePanel, setVisiblePanel] = useState("");
   const { plannedTrips, setPlannedTrips } = useTrip();
-
-  console.log("planned Trips", plannedTrips);
 
   const limitText = (text, maxLength) => {
     if (text.length > maxLength) {
@@ -59,8 +57,13 @@ const DisplaySearch = () => {
     }
   };
 
+  if (searchError) {
+    return <div className="error-message">{searchError}</div>;
+  }
+
   return (
     <div className="search-page">
+
       <div className="display-data-wrapper">
         <ul className="data-cards">
           {tripData.map((data, index) => {
@@ -107,6 +110,10 @@ const DisplaySearch = () => {
                         {trip.name}
                       </Link>
                     ))}
+
+                    {addTripError && (
+                      <div className="error-message">{addTripError}</div>
+                    )}
                   </div>
                 )}
               </li>

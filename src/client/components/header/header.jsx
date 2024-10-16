@@ -10,30 +10,17 @@ const Header = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
   const [isVisible, setIsVisible] = useState(false);
-  const { apiUrl, tripData, setTripData } = useTrip();
+  const { fetchTravelData } = useTrip();
   const [searchInput, setSearchInput] = useState("");
 
-  function handleSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const fetchData = async () => {
-      // let url = `${apiUrl}/api/search?searchQuery=${searchInput}`;
+    if (!searchInput) return;
 
-      // const res = await fetch(url);
-
-      // const data = await res.json();
-      // setTripData(data.data);
-      // localStorage.setItem("data", JSON.stringify(data.data));
-      //  navigate("/search");
-
-      // Delete these three line
-      const storedData = JSON.parse(localStorage.getItem("data"));
-      setTripData(storedData);
-      navigate("/search");
-    };
-    console.log("trip Data", tripData);
-    fetchData();
-  }
+    fetchTravelData(searchInput);
+    setSearchInput("");
+  };
 
   function handleInput(event) {
     setSearchInput(event.target.value);

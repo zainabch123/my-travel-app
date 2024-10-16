@@ -3,10 +3,6 @@ import { getTravelDataDb } from "../domains/api.js";
 const getTravelData = async (req, res) => {
   const searchQuery = req.query.searchQuery;
   const category = req.query.category;
-
-  if (category) {
-    console.log("category", category)
-  };
   const tripAdvisorApiKey = process.env.VITE_TRIPADVISOR_API_KEY;
 
   try {
@@ -45,6 +41,7 @@ const getTravelData = async (req, res) => {
     });
   } catch (error) {
     console.log("error", error);
+     return res.status(500).json({ error: "Unable to fetch travel data." });
   }
 };
 
