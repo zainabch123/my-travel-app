@@ -1,11 +1,6 @@
 .register-page {
   height: 100vh;
-  /* background: linear-gradient(
-    to bottom right,
-    rgb(57, 198, 237),
-    rgb(224, 232, 234)
-  ); */
-  background: linear-gradient(135deg, rgb(57, 198, 237), rgb(224, 232, 234));
+  background: linear-gradient(135deg, rgb(55, 193, 231), rgb(224, 232, 234));
   background-size: 400% 400%; 
   animation: gradientAnimation 10s ease infinite;
   display: flex;
@@ -57,7 +52,7 @@ input {
   transition: border-color 0.3s ease;
 }
 input:focus {
-  border-color: rgb(57, 198, 237);
+  border-color: rgb(55, 193, 231);
 }
 
 #signup-button {
@@ -68,7 +63,7 @@ input:focus {
   border-radius: 8px;
   margin-bottom: 20px;
   border: none;
-  background-color: rgb(57, 198, 237);
+  background-color: rgb(55, 193, 231);
   color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -80,8 +75,9 @@ input:focus {
 
 
 
-.signup-option p {
-  margin: 20px 0px;
+.login-option p {
+  margin: 10px 0px 20px 0px;
   font-size: 16px;
   font-size: 16px;
 }
+

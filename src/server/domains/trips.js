@@ -26,6 +26,33 @@ const getUsersTripsDb = async (userId) => {
         }
     })
 
+};
+
+const getTripByIdDb = async (tripId) => {
+  return await prisma.trips.findUnique({
+    where: {
+      id: tripId,
+    },
+    include: {
+      tripItems: true
+    }
+  });
+};
+
+const addItemDb = async (newItemData, tripId) => {
+  const { name, description, address, imgUrl, rating, category } = newItemData;
+
+  return await prisma.tripItem.create({
+    data: {
+      name,
+      description,
+      address,
+      imgUrl,
+      rating,
+      category,
+      tripId
+    },
+  });
 }
 
-export { addNewTripDb, getUsersTripsDb };
+export { addNewTripDb, getUsersTripsDb, addItemDb, getTripByIdDb };

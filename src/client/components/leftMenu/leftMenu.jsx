@@ -14,7 +14,7 @@ const LeftMenu = () => {
       {plannedTrips && (
         <div className="trip-links">
           {plannedTrips.map((trip, index) => {
-            return <Link key={index}>{trip.name}</Link>;
+            return <Link key={index} to={`/viewTrip/${trip.id}`}>{trip.name}</Link>;
           })}
         </div>
       )}

@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
 import useTrip from "../../hooks/useTrip";
 
 import "./dashboard.css";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const { plannedTrips, addNewTrip, error } = useTrip();
   const [showModal, setShowModal] = useState(false);
   const [newTrip, setNewTrip] = useState({
@@ -13,10 +15,8 @@ const Dashboard = () => {
     startDate: "",
     endDate: "",
     imgUrl: "",
-    itinerary: [],
   });
-  
- 
+
   function handleInput(event) {
     const { name, value } = event.target;
     setNewTrip({
@@ -29,6 +29,14 @@ const Dashboard = () => {
     event.preventDefault();
 
     addNewTrip(newTrip);
+    setNewTrip({
+      name: "",
+      location: "",
+      startDate: "",
+      endDate: "",
+      imgUrl: "",
+      itinerary: [],
+    });
     closeModal();
   }
 
@@ -46,7 +54,7 @@ const Dashboard = () => {
         <div className="planned-trips-header">
           <h1>Planned Trips</h1>
           <button className="add-trip-button" onClick={handleAddTripClick}>
-            + Add New Trip{" "}
+            + New Trip{" "}
           </button>
         </div>
         {plannedTrips && (
@@ -73,7 +81,9 @@ const Dashboard = () => {
                           : ""}
                       </p>
                     </div>
-                    <button>View Details</button>
+                    <button onClick={() => navigate(`/viewTrip/${trip.id}`)}>
+                      View Details
+                    </button>
                   </li>
                 );
               })}

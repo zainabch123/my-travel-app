@@ -17,6 +17,7 @@ enum Type {
   HOTEL
   ATTRACTION
   RESTAURANT
+  ACTIVITY
 }
 
 model User {
@@ -87,7 +88,11 @@ model TripItem {
   id Int @id @default(autoincrement())
   name String
   description String?
-  category    
+  imgUrl      String?
+  rating      String?
+  category    String?
+  trip        Trips    @relation(fields: [tripId], references: [id])
+  tripId      Int
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 }

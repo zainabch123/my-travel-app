@@ -85,7 +85,7 @@ const Register = () => {
             name="password"
             onChange={handleInput}
           />
-          {error && <p>{error}</p>}
+          {error && <p className="error">{error}</p>}
           <button id="signup-button" type="submit" onSubmit={handleSubmit}>
             Sign Up
           </button>

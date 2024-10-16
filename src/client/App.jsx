@@ -3,6 +3,7 @@ import Login from "./pages/login/login.jsx";
 import Register from "./pages/register/register.jsx";
 import Dashboard from "./pages/dashboard/dashboard.jsx";
 import DisplaySearch from "./pages/displaySearch/displaySearch.jsx";
+import ViewTrip from "./pages/viewTrip/viewTrip.jsx";
 import ProtectedRoute from "./components/protectedRoute/protectedRoute.jsx";
 import { AuthProvider } from "./context/auth.jsx";
 import { TripProvider } from "./context/trip.jsx";
@@ -33,6 +34,12 @@ function App() {
               </ProtectedRoute>
             }
           ></Route>
+
+          <Route path="/viewTrip/:id" element={
+            <ProtectedRoute>
+              <ViewTrip/>
+            </ProtectedRoute>
+          }></Route>
         </Routes>
       </TripProvider>
     </AuthProvider>

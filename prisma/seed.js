@@ -2,9 +2,9 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function seed() {
-  const hotels = await createHotels();
-  const attractions = await createAttractions();
-  const activities = await createActivities();
+  // const hotels = await createHotels();
+  // const attractions = await createAttractions();
+  // const activities = await createActivities();
 
   process.exit(0);
 }

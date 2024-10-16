@@ -7,6 +7,7 @@
 
 .planned-trips-header {
   margin: 20px 20px 0px 20px;
+  padding: 20px 20px;
   justify-items: left;
   align-items: center;
   display: grid;
@@ -15,28 +16,31 @@
 
 .planned-trips-header h1 {
   margin-bottom: 0px;
+  font-size: 2.5rem;
 }
+
 
 .add-trip-button {
   border-radius: 30px;
   width: 150px;
   height: 50px;
   border: none;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 500;
-  border: 1px solid rgb(210, 209, 209);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 }
 
 .add-trip-button:hover {
   color: white;
   font-weight: 500;
-  background-color: rgb(172, 172, 172);
+  background-color: rgb(55, 193, 231);
   border: none;
 }
 
 .planned-trips {
   margin: 20px;
+  padding: 20px;
 }
 
 .trip-cards {
@@ -80,9 +84,8 @@
   color: #888;
 }
 
-.card-header,
 .card-content {
-  padding: 20px;
+  padding: 20px 20px 0px 20px;
 }
 
 .card-content p {
@@ -90,20 +93,21 @@
 }
 
 .trip-card button {
-  margin: 10px;
+  margin: 0px 10px 15px 10px;
   padding: 10px;
-  border-radius: 15px;
-  border: 1px solid rgb(206, 206, 206);
+  border-radius: 30px;
+  border: none;
   width: 120px;
   justify-self: end;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 }
 
 
 .trip-card button:hover {
   color: white;
   font-weight: 500;
-  background-color: rgb(172, 172, 172);
+  background-color:  rgb(55, 193, 231);
   border: none;
 }
 

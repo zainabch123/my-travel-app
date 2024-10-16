@@ -3,7 +3,7 @@
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  background: rgb(102, 218, 251);
+  background: rgb(55, 193, 231) ;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -14,14 +14,19 @@
   grid-template-columns: 40px auto;
   justify-items: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .travel-planner-logo h1 {
   margin: 20px 20px 20px 0px;
+  color: white;
+  text-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
 }
 
 .travel-planner-logo svg {
   width: 100%;
+  fill: white;
+  
 }
 
 .search-bar-wrapper {
@@ -33,14 +38,12 @@
 #search-query-submit {
   width: max-content;
   margin: 20px 0px 20px 0px;
-  border-radius: 8px;
+  border-radius: 30px;
   padding: 10px;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   border: none;
   color: black;
   background-color: rgb(239, 239, 239);
-  border: 1px solid rgb(223, 222, 222);
   font-weight: 400;
   transition: box-shadow 0.3s ease; 
   
@@ -53,8 +56,9 @@
 #search-bar {
   width: 900px;
   margin: 20px 10px 20px 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-   transition: box-shadow 0.3s ease; 
+  transition: box-shadow 0.3s ease; 
+  border-radius: 30px;
+  border: none;
 }
 
 #search-bar:focus {
@@ -73,7 +77,6 @@
   align-content: center;
   cursor: pointer;
   border: 1px solid rgb(210, 209, 209);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .profile-circle:hover {

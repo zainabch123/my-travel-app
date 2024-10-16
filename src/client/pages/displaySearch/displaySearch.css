@@ -1,4 +1,7 @@
-
+.search-page {
+  overflow: scroll;
+  overflow-x: hidden;
+}
 .display-data-wrapper {
     display: flex;
     flex-direction: column;
@@ -17,13 +20,18 @@
 
 .data-card {
     display: grid;
-    grid-template-columns: minmax(300px, 350px) minmax(200px, 400px) auto;
+    grid-template-columns: minmax(200px, 350px) minmax(200px, 400px) auto;
     background-color: white;
     list-style: none;
     border: 1px solid rgb(206, 206, 206);
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     position: relative;
+    cursor: pointer;
+}
+
+.data-card:hover {
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2); 
 }
 
 .card-img {
@@ -66,7 +74,7 @@
 .card-buttons button:hover {
   color: white;
   font-weight: 500;
-  background-color: rgb(172, 172, 172);
+  background-color: rgb(55, 193, 231);
   border: none;
 }
 
@@ -101,4 +109,9 @@
   display: block;
   margin-top: 5px;
   text-decoration: none;
+  color: black;
+}
+
+.card-panel a:hover {
+  color: rgb(55, 193, 231);
 }

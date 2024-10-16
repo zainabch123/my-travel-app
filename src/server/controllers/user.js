@@ -26,7 +26,7 @@ const registerUser = async (req, res) => {
           .json({ error: "A user with the provided username already exists" });
       }
     }
-
+    console.log("error", e)
     return res.status(500).json({ error: "Unable to create new user" });
   }
 };

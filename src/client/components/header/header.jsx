@@ -23,7 +23,7 @@ const Header = () => {
 
       // const data = await res.json();
       // setTripData(data.data);
-      
+      // localStorage.setItem("data", JSON.stringify(data.data));
       //  navigate("/search");
 
       // Delete these three line
@@ -31,6 +31,7 @@ const Header = () => {
       setTripData(storedData);
       navigate("/search");
     };
+    console.log("trip Data", tripData);
     fetchData();
   }
 
@@ -42,11 +43,9 @@ const Header = () => {
     setIsVisible(!isVisible);
   };
 
-  console.log("trip Data", tripData);
-
   return (
     <header className="header">
-      <div className="travel-planner-logo">
+      <div className="travel-planner-logo" onClick={() => navigate("/")}>
         <svg
           fill="#000000"
           version="1.1"

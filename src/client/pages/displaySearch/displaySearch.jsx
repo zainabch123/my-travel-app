@@ -1,10 +1,13 @@
 import { useState } from "react";
 import useTrip from "../../hooks/useTrip";
+import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 
 import "./displaySearch.css";
 
 const DisplaySearch = () => {
+  const { apiUrl } = useTrip();
+  const { token } = useAuth();
   const { tripData, setTripData } = useTrip();
   const [visiblePanel, setVisiblePanel] = useState("");
   const { plannedTrips, setPlannedTrips } = useTrip();
@@ -22,7 +25,40 @@ const DisplaySearch = () => {
     setVisiblePanel(visiblePanel === index ? null : index);
   };
 
- 
+  const addItemToTrip = async (tripId, item) => {
+    console.log("tridId", tripId);
+    console.log("tripItem", item);
+
+    const imageUrl =
+      item.images[0]?.images?.original?.url ||
+      item.images[0]?.images?.large?.url;
+
+    try {
+      const res = await fetch(`${apiUrl}/trips/${tripId}/addItem`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          name: item.name,
+          description: item.description,
+          imgUrl: imageUrl,
+          rating: item.rating,
+          category: item.category.name,
+        }),
+      });
+
+      const data = await res.json();
+      console.log("data", data);
+      setVisiblePanel(null)
+
+      return data;
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   return (
     <div className="search-page">
       <div className="display-data-wrapper">
@@ -62,7 +98,12 @@ const DisplaySearch = () => {
                   <div className="card-panel visible">
                     <h2>Add To:</h2>
                     {plannedTrips.map((trip) => (
-                      <Link key={trip.id}>
+                      <Link
+                        key={trip.id}
+                        onClick={() => {
+                          addItemToTrip(trip.id, data);
+                        }}
+                      >
                         {trip.name}
                       </Link>
                     ))}

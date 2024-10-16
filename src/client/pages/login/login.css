@@ -1,11 +1,6 @@
 .login-page {
   height: 100vh;
-  /* background: linear-gradient(
-    to bottom right,
-    rgb(57, 198, 237),
-    rgb(224, 232, 234)
-  ); */
-  background: linear-gradient(135deg, rgb(57, 198, 237), rgb(224, 232, 234));
+  background: linear-gradient(135deg, rgb(55, 193, 231), #87CEEB, rgb(224, 232, 234));
   background-size: 400% 400%; 
   animation: gradientAnimation 10s ease infinite;
   display: flex;
@@ -57,7 +52,7 @@ input {
   transition: border-color 0.3s ease;
 }
 input:focus {
-  border-color: rgb(57, 198, 237);
+  border-color: rgb(55, 193, 231);
 }
 
 #login-button {
@@ -68,7 +63,7 @@ input:focus {
   border-radius: 8px;
   margin-bottom: 20px;
   border: none;
-  background-color: rgb(57, 198, 237);
+  background-color: rgb(55, 193, 231);
   color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -80,8 +75,13 @@ input:focus {
 
 .login-options {
   text-align: center;
-  height: 50px;
+  height: auto;
   border-bottom: solid lightgray 1px;
+}
+
+.error {
+  padding: 10px 0px;
+  color: tomato;
 }
 
 .signup-option p {
@@ -96,7 +96,7 @@ input:focus {
   border-radius: 8px;
   margin-bottom: 10px;
   border: none;
-  background-color: rgb(57, 198, 237);
+  background-color: rgb(55, 193, 231);
   color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
