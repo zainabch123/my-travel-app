@@ -68,6 +68,7 @@ const Header = () => {
         <button id="search-query-submit" type="button" onClick={handleSubmit}>
           {loading ? <div className="spinner"></div> : "Search"}
         </button>
+        
       </div>
       {user && (
         <div className="profile-circle" onClick={handleOnClickProfile}>

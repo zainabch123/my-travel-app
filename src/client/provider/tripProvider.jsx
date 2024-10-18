@@ -77,24 +77,24 @@ const TripProvider = ({ children }) => {
   const fetchTravelData = async (searchInput) => {
     setSearchError(null);
     try {
-      const res = await fetch(`${apiUrl}/api/search?searchQuery=${searchInput}`);
-      const data = await res.json();
+      // const res = await fetch(`${apiUrl}/api/search?searchQuery=${searchInput}`);
+      // const data = await res.json();
 
-      if (data.error) {
-        throw new Error(data.error);
-      }
+      // if (data.error) {
+      //   throw new Error(data.error);
+      // }
 
-      setTripData(data.data);
-      // localStorage.setItem(
-      //   "hotels in paris",
-      //   JSON.stringify(data.data)
-      // );
-      return tripData;
+      // setTripData(data.data);
+      // // localStorage.setItem(
+      // //   "hotels in paris",
+      // //   JSON.stringify(data.data)
+      // // );
+      // return tripData;
 
       // Delete these three line
-      // const storedData = JSON.parse(localStorage.getItem("data"));
-      // setTripData(storedData);
-      // return tripData;
+      const storedData = JSON.parse(localStorage.getItem("data"));
+      setTripData(storedData);
+      return tripData;
     } catch (error) {
       setSearchError(error.message || "Unable to fetch travel data");
       navigate("/search");

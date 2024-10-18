@@ -3,8 +3,7 @@
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  background: rgb(55, 193, 231, 0.7) ;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+ 
 }
 
 .travel-planner-logo {
@@ -81,7 +80,6 @@
   background-color: white;
   align-content: center;
   cursor: pointer;
-  border: 1px solid rgb(210, 209, 209);
 }
 
 .profile-circle:hover {

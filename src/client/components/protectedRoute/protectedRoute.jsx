@@ -10,9 +10,9 @@ const ProtectedRoute = ({ children }) => {
   }
 
   return (
-    <div className="container">
+    <div className="container mx-auto w-full max-w-none">
       <Header />
-      <LeftMenu/>
+      <LeftMenu />
       {children}
     </div>
   );

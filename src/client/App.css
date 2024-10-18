@@ -19,7 +19,7 @@ h2 {
   display: grid; 
   grid-template-columns: 315px 1fr;
   grid-template-rows: 80px 1fr;
-   background: white
+  background:  rgb(55, 193, 231, 0.7);
 }
 
 @font-face {

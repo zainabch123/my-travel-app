@@ -67,19 +67,13 @@ const Dashboard = () => {
     return daysRemaining;
   };
   return (
-    <>
+    <div className="dashboard-page">
       <div className="planned-trips-wrapper">
-        <div className="planned-trips-header">
-          <h1>Planned Trips</h1>
-          <button className="add-trip-button" onClick={handleAddTripClick}>
-            + New Trip{" "}
-          </button>
-        </div>
         {plannedTrips && (
           <div className="planned-trips">
             <ul className="trip-cards">
               {plannedTrips.map((trip, index) => {
-                 const daysRemaining = calculateDaysRemaining(trip.startDate);
+                const daysRemaining = calculateDaysRemaining(trip.startDate);
                 return (
                   <li key={index} className="trip-card">
                     {trip.imgUrl ? (
@@ -115,6 +109,12 @@ const Dashboard = () => {
             </ul>
           </div>
         )}
+      </div>
+
+      <div className="planned-trips-header">
+        <button className="add-trip-button" onClick={handleAddTripClick}>
+          +
+        </button>
       </div>
 
       {showModal && (
@@ -166,8 +166,8 @@ const Dashboard = () => {
                 onChange={handleInput}
               ></input>
               {addTripError && (
-              <div className="modal-error-message">{addTripError}</div>
-            )}
+                <div className="modal-error-message">{addTripError}</div>
+              )}
               <button
                 id="new-trip-form-submit"
                 type="submit"
@@ -179,7 +179,7 @@ const Dashboard = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

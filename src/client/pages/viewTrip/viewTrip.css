@@ -25,6 +25,7 @@
   border-radius: 8px;
   display: grid;
   grid-template-columns: minmax(200px, 400px) minmax(200px, 500px);
+  background-color: white;
 }
 
 .trip-image {
