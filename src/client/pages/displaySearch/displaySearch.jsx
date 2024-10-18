@@ -1,16 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import useTrip from "../../hooks/useTrip";
-import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 
 import "./displaySearch.css";
 
 const DisplaySearch = () => {
-  const { apiUrl } = useTrip();
-  const { token } = useAuth();
   const { tripData, searchError } = useTrip();
   const [visiblePanel, setVisiblePanel] = useState("");
-  const { plannedTrips, setPlannedTrips } = useTrip();
+  const { plannedTrips, addItemToTrip, addItemError, setAddItemError } =
+    useTrip();
+  const [itemAdded, setItemAdded] = useState(null);
+
+  const scrollableRef = useRef(null);
+
+  useEffect(() => {
+    // Scroll to the top of the container whenever tripData changes
+    if (scrollableRef.current) {
+      scrollableRef.current.scrollTo({
+        top: 0, 
+        behavior: "smooth", 
+      });
+    }
+  }, [tripData]); 
 
   const limitText = (text, maxLength) => {
     if (text.length > maxLength) {
@@ -19,41 +30,22 @@ const DisplaySearch = () => {
     return text;
   };
 
-  const handleAddToTrip = (index) => {
+  const handleOnClick = (index) => {
+    setAddItemError(null);
     setVisiblePanel(visiblePanel === index ? null : index);
   };
 
-  const addItemToTrip = async (tripId, item) => {
-    console.log("tridId", tripId);
-    console.log("tripItem", item);
-
+  const handleAddToTrip = async (tripId, item) => {
     const imageUrl =
       item.images[0]?.images?.original?.url ||
       item.images[0]?.images?.large?.url;
 
-    try {
-      const res = await fetch(`${apiUrl}/trips/${tripId}/addItem`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          name: item.name,
-          description: item.description,
-          imgUrl: imageUrl,
-          rating: item.rating,
-          category: item.category.name,
-        }),
-      });
+    const response = await addItemToTrip(tripId, item, imageUrl);
 
-      const data = await res.json();
-      console.log("data", data);
-      setVisiblePanel(null)
-
-      return data;
-    } catch (error) {
-      console.log("error", error);
+    if (response) {
+      setItemAdded(true);
+      setVisiblePanel(null);
+      setTimeout(() => setItemAdded(null), 2000);
     }
   };
 
@@ -62,8 +54,12 @@ const DisplaySearch = () => {
   }
 
   return (
-    <div className="search-page">
-
+    <div className="search-page" ref={scrollableRef}>
+      {itemAdded && (
+        <div className="added-item-graphic">
+          <p>Added to Trip!</p>
+        </div>
+      )}
       <div className="display-data-wrapper">
         <ul className="data-cards">
           {tripData.map((data, index) => {
@@ -92,7 +88,7 @@ const DisplaySearch = () => {
                 </div>
                 <div className="card-buttons">
                   <button>View More Details</button>
-                  <button type="button" onClick={() => handleAddToTrip(index)}>
+                  <button type="button" onClick={() => handleOnClick(index)}>
                     Add To My Trip
                   </button>
                 </div>
@@ -104,15 +100,14 @@ const DisplaySearch = () => {
                       <Link
                         key={trip.id}
                         onClick={() => {
-                          addItemToTrip(trip.id, data);
+                          handleAddToTrip(trip.id, data);
                         }}
                       >
                         {trip.name}
                       </Link>
                     ))}
-
-                    {addTripError && (
-                      <div className="error-message">{addTripError}</div>
+                    {addItemError && (
+                      <div className="modal-error-message">{addItemError}</div>
                     )}
                   </div>
                 )}

@@ -6,8 +6,8 @@
 }
 
 .planned-trips-header {
-  margin: 20px 20px 0px 20px;
-  padding: 20px 20px;
+  margin: 20px 20px 0px 10px;
+  padding: 20px 10px;
   justify-items: left;
   align-items: center;
   display: grid;
@@ -34,13 +34,13 @@
 .add-trip-button:hover {
   color: white;
   font-weight: 500;
-  background-color: rgb(55, 193, 231);
+  background-color: rgb(55, 193, 231, 0.8);
   border: none;
 }
 
 .planned-trips {
   margin: 20px;
-  padding: 20px;
+  padding-top: 10px;
 }
 
 .trip-cards {
@@ -107,7 +107,7 @@
 .trip-card button:hover {
   color: white;
   font-weight: 500;
-  background-color:  rgb(55, 193, 231);
+  background-color:  rgb(55, 193, 231, 0.7);
   border: none;
 }
 
@@ -162,5 +162,9 @@
 
 .modal-error-message {
   margin: 10px;
+  color: tomato;
+}
+
+.days-remaining {
   color: tomato;
 }

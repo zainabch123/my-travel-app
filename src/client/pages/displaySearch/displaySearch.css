@@ -122,3 +122,23 @@
   padding: 20px;
   color: tomato;
 }
+
+.added-item-graphic {
+  position: fixed;
+  z-index: 10;
+  top: 100px;
+  right: 40px;
+  background-color: rgb(110, 203, 229, 0.4);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  animation: fadeInOut 2s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}

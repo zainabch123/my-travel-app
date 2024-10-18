@@ -5,8 +5,8 @@ import Dashboard from "./pages/dashboard/dashboard.jsx";
 import DisplaySearch from "./pages/displaySearch/displaySearch.jsx";
 import ViewTrip from "./pages/viewTrip/viewTrip.jsx";
 import ProtectedRoute from "./components/protectedRoute/protectedRoute.jsx";
-import { AuthProvider } from "./context/auth.jsx";
-import { TripProvider } from "./context/trip.jsx";
+import  AuthProvider  from "./provider/authProvider.jsx";
+import TripProvider from "./provider/tripProvider.jsx";
 
 import "./App.css";
 

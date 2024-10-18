@@ -12,14 +12,23 @@ const Header = () => {
   const [isVisible, setIsVisible] = useState(false);
   const { fetchTravelData } = useTrip();
   const [searchInput, setSearchInput] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!searchInput) return;
 
-    fetchTravelData(searchInput);
-    setSearchInput("");
+    setLoading(true);
+
+    const res = await fetchTravelData(searchInput);
+
+    setLoading(false);
+
+    if (res) {
+      setSearchInput("");
+      navigate("/search");
+    }
   };
 
   function handleInput(event) {
@@ -57,7 +66,7 @@ const Header = () => {
           onChange={handleInput}
         ></input>
         <button id="search-query-submit" type="button" onClick={handleSubmit}>
-          Search
+          {loading ? <div className="spinner"></div> : "Search"}
         </button>
       </div>
       {user && (

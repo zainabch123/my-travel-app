@@ -2,6 +2,7 @@ import { useState } from "react";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import useTrip from "../../hooks/useTrip";
+import moment from "moment";
 
 import "./dashboard.css";
 
@@ -56,7 +57,15 @@ const Dashboard = () => {
     return <div className="error-message">{fetchTripsError}</div>;
   }
 
-  
+  const calculateDaysRemaining = (startDate) => {
+    const currentDate = new Date();
+    const tripStartDate = new Date(startDate);
+    
+    const timeDifference = tripStartDate - currentDate;
+    const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+
+    return daysRemaining;
+  };
   return (
     <>
       <div className="planned-trips-wrapper">
@@ -70,6 +79,7 @@ const Dashboard = () => {
           <div className="planned-trips">
             <ul className="trip-cards">
               {plannedTrips.map((trip, index) => {
+                 const daysRemaining = calculateDaysRemaining(trip.startDate);
                 return (
                   <li key={index} className="trip-card">
                     {trip.imgUrl ? (
@@ -89,6 +99,12 @@ const Dashboard = () => {
                           ? format(new Date(trip.endDate), "dd-MM-yyyy")
                           : ""}
                       </p>
+                      {daysRemaining !== null && (
+                        <p className="days-remaining">
+                          {daysRemaining} day{daysRemaining !== 1 ? "s" : ""}{" "}
+                          left until the trip!
+                        </p>
+                      )}
                     </div>
                     <button onClick={() => navigate(`/viewTrip/${trip.id}`)}>
                       View Details

@@ -23,6 +23,9 @@ const getUsersTripsDb = async (userId) => {
     return await prisma.trips.findMany({
         where: {
             userId: userId
+        },
+        include: {
+          tripItems: true
         }
     })
 

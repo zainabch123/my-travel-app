@@ -19,6 +19,7 @@
     background-position: 0% 50%;
   }
 }
+
 .login-form {
   background-color: white;
   padding: 30px;
@@ -70,7 +71,7 @@ input:focus {
 }
 
 #login-button:hover {
-  background-color: rgb(40, 150, 200); 
+  background-color: rgb(141, 207, 226); 
 }
 
 .login-options {
