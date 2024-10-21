@@ -2,7 +2,6 @@ import { useState } from "react";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import useTrip from "../../hooks/useTrip";
-import moment from "moment";
 
 import "./dashboard.css";
 
